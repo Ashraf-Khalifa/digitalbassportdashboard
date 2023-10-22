@@ -54,7 +54,7 @@ function Events() {
       formData.append("content", newEvent.content);
 
       const response = await axios.post(
-        "https://coral-app-harbz.ondigitalocean.app/event/add",
+        "https://seashell-app-6v6yj.ondigitalocean.app/event/add",
         formData,
         {
           headers: {
@@ -79,7 +79,7 @@ function Events() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://coral-app-harbz.ondigitalocean.app/event/list"
+        "https://seashell-app-6v6yj.ondigitalocean.app/event/list"
       );
       setEvents(response.data.data);
       setEventCount(response.data.data.length); // Update event count
@@ -99,7 +99,7 @@ function Events() {
     try {
       // Send a DELETE request to delete the event from the database
       await axios.delete(
-        `https://coral-app-harbz.ondigitalocean.app/event/delete/${eventId}`
+        `https://seashell-app-6v6yj.ondigitalocean.app/event/delete/${eventId}`
       );
   
       // After successfully deleting the event and its image (if it had one),
@@ -143,7 +143,7 @@ function Events() {
       formData.append("content", updateEvent.content);
 
       const response = await axios.put(
-        `https://orca-app-monkj.ondigitalocean.app/event/update/${selectedEventId}`,
+        `https://seashell-app-6v6yj.ondigitalocean.app/event/update/${selectedEventId}`,
         formData,
         {
           headers: {

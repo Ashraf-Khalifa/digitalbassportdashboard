@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Paper Dashboard React - v1.3.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Nav } from "reactstrap";
@@ -29,6 +11,7 @@ var ps;
 function Sidebar(props) {
   const location = useLocation();
   const sidebar = React.useRef();
+  const userRole = localStorage.getItem("userRole");
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
@@ -71,13 +54,18 @@ function Sidebar(props) {
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
           {props.routes.map((prop, key) => {
+            if (prop.name === 'User Management' && userRole !== '1') {
+              // Skip rendering the "User Management" link for roles other than "1"
+              return null;
+            }
+
+            if (prop.name === 'Add admin' && userRole !== '1') {
+              // Skip rendering the "Add Admin" link for roles other than "1"
+              return null;
+            }
+
             return (
-              <li
-                className={
-                  activeRoute(prop.path) + (prop.pro ? " active-pro" : "")
-                }
-                key={key}
-              >
+              <li className={activeRoute(prop.path) + (prop.pro ? ' active-pro' : '')} key={key}>
                 <NavLink to={prop.layout + prop.path} className="nav-NavLink">
                   <i className={prop.icon} />
                   <p>{prop.name}</p>

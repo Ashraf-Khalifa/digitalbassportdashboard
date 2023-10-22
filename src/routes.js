@@ -1,44 +1,50 @@
-/*!
-
-=========================================================
-* Paper Dashboard React - v1.3.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import Dashboard from "views/Dashboard.js";
-import Notifications from "views/Notifications.js";
+// import Notifications from "views/Notifications.js";
 import Icons from "views/Icons.js";
 import About from "views/About";
 import Background from "views/Background";
-import Maps from "views/Map.js";
+// import Maps from "views/Map.js";
 import UserPage from "views/User.js";
-import UpgradeToPro from "views/Upgrade.js";
+import Qr_code from "views/Qr_code";
 import Gallery from "views/Gallery";
-import AddAdmin from "views/AddAdmin"
+// import AddAdmin from "views/AddAdmin"
 import TankShop from "views/TankShop";
-import Login from "views/Login";
 import PrivacyPolicies from "views/PrivacyPolicies";
 import Terms from "views/Terms";
 import Users from "views/Users";
 import SocialMedia from "views/SocialMedia";
 import Events from "views/Events";
+
+import { Routes, Route, Navigate } from 'react-router-dom';
+
+// function PrivateRoute({ element }) {
+//   const token = localStorage.getItem('token');
+//   const userRole = localStorage.getItem('userRole');
+
+//   if (!token) {
+//     return <Navigate to="/" replace />;
+//   }
+
+//    // Check if the user has role "0"
+//    if (userRole === '0') {
+//     // If the user has role "0," block access to "User Management" and "UserPage"
+//     if (element.props.path === '/user-management' || element.props.path === '/UserPage') {
+//       return <Navigate to="/" replace />;
+//     }
+//   }
+
+//   return <Route element={element} />;
+// }
+
+
 var routes = [
   {
     path: "/dashboard",
     name: "Dashboard",
     icon: "nc-icon nc-bank",
-    component: <Dashboard />,
+    component: (
+    <Dashboard />
+    ),
     layout: "/admin",
   },
   {
@@ -47,6 +53,7 @@ var routes = [
     icon: "nc-icon nc-diamond",
     component: <PrivacyPolicies />,
     layout: "/admin",
+
   },
   {
     path: "/Terms",
@@ -54,20 +61,24 @@ var routes = [
     icon: "nc-icon nc-diamond",
     component: <Terms />,
     layout: "/admin",
+
   },
   {
-    path: "/banners",
-    name: "Users",
+    path: "/user-management",
+    name: "User Management",
     icon: "nc-icon nc-diamond",
     component: <Users />,
     layout: "/admin",
   },
+  
+  
   {
     path: "/SocialMedia",
     name: "Socia lMedia ",
     icon: "nc-icon nc-diamond",
     component: <SocialMedia />,
     layout: "/admin",
+
   },
   {
     path: "/icons",
@@ -75,6 +86,7 @@ var routes = [
     icon: "nc-icon nc-diamond",
     component: <Icons />,
     layout: "/admin",
+
   },
   // {
   //   path: "/maps",
@@ -90,19 +102,19 @@ var routes = [
   //   component: <Notifications />,
   //   layout: "/admin",
   // },
-  {
-    path: "/admin",
-    name: "Add Admin",
-    icon: "nc-icon nc-single-02",
-    component: <AddAdmin />,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/admin",
+  //   name: "Add Admin",
+  //   icon: "nc-icon nc-single-02",
+  //   component: <AddAdmin />,
+  //   layout: "/admin",
+  // },
   // {
   //   path: "/login",
   //   name: "Login",
   //   icon: "nc-icon nc-single-02",
   //   component: <Login/>,
-  //   layout: "/admin",
+  //   layout: "/",
   // },
   {
     path: "/events",
@@ -110,6 +122,7 @@ var routes = [
     icon: "nc-icon nc-single-02",
     component: <Events />,
     layout: "/admin",
+
   },
   {
     path: "/Gallery",
@@ -117,6 +130,7 @@ var routes = [
     icon: "nc-icon nc-single-02",
     component: <Gallery />,
     layout: "/admin",
+
   },
   {
     path: "/TankShop",
@@ -124,6 +138,7 @@ var routes = [
     icon: "nc-icon nc-single-02",
     component: <TankShop />,
     layout: "/admin",
+
   },
   {
     path: "/Background",
@@ -131,6 +146,7 @@ var routes = [
     icon: "nc-icon nc-tile-56",
     component: <Background />,
     layout: "/admin",
+
   },
   {
     path: "/About",
@@ -138,14 +154,36 @@ var routes = [
     icon: "nc-icon nc-caps-small",
     component: <About />,
     layout: "/admin",
+
   },
-  // {
-  //   pro: true,
-  //   path: "/upgrade",
-  //   name: "Upgrade to PRO",
-  //   icon: "nc-icon nc-spaceship",
-  //   component: <UpgradeToPro />,
-  //   layout: "/admin",
-  // },
+  {
+    
+    path: "/Qr_code",
+    name: "Qr_code",
+    icon: "nc-icon nc-spaceship",
+    component: <Qr_code />,
+    layout: "/admin",
+
+  },
+  {
+    
+    path: "/UserPage",
+    name: "Add admin",
+    icon: "nc-icon nc-spaceship",
+    component: <UserPage />,
+    layout: "/admin",
+
+  },
+
 ];
+
+// Check the user's role and filter out restricted routes
+const userRole = localStorage.getItem("userRole");
+if (userRole === "0") {
+  routes = routes.filter(
+    (route) =>
+      route.path !== "/user-management" && route.path !== "/UserPage"
+  );
+}
+
 export default routes;

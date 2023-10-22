@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import {
   Card,
@@ -14,53 +15,124 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import "../assets/css/style.css";
 
-function Users() {
+function UserManagement() {
+
+  // State variables for users, loading, and other necessary data
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [userCount, setUserCount] = useState(0);
-  const fetchUserCount = async () => {
+  const [newUser, setNewUser] = useState({
+    fullName: "",
+    email: "",
+    photoUrl: "",
+    number: "",
+    gender: "",
+    birthdate: "",
+    nationality: "",
+    city: "",
+    verify: "",
+  });
+
+  const navigate = useNavigate();
+
+  // Function to fetch the list of users
+  const fetchUsers = async () => {
     try {
-      const response = await axios.get(
-        "https://coral-app-harbz.ondigitalocean.app/user/count"
-      );
-      const userCount = response.data.data[0].count; // Access the count property inside data
-      setUserCount(userCount);
+      const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/user/List");
+      setUsers(response.data.data);
       setLoading(false);
-      setError(null);
     } catch (error) {
-      console.error(`Error fetching user count: ${error}`);
+      setError("Error fetching users. Please try again later.");
       setLoading(false);
-      setError("Error fetching user count. Please try again later.");
+    }
+  };
+
+  // Function to handle form submission for adding a new user
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/user/add", newUser);
+      console.log("User added successfully:", response.data);
+
+      // Clear the input fields
+      setNewUser({
+        fullName: "",
+        email: "",
+        photoUrl: "",
+        number: "",
+        gender: "",
+        birthdate: "",
+        nationality: "",
+        city: "",
+        verify: "",
+      });
+
+      // Fetch the updated list of users
+      fetchUsers();
+    } catch (error) {
+      console.error("Error adding user:", error);
     }
   };
 
   useEffect(() => {
-    fetchUserCount();
-  }, []);
+    
+    fetchUsers();
+  }, );
 
   return (
-    <div className="content">
-      <Row>
-        <Col md="12">
-          <Card>
-            <CardHeader>
-              <CardTitle tag="h4">Users number</CardTitle>
-            </CardHeader>
-            <CardBody>
-              {loading ? (
-                <p>Loading...</p>
-              ) : error ? (
-                <p>{error}</p>
-              ) : (
-                <p>Total Users: {userCount}</p>
-              )}
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-    </div>
+    <>
+      <div className="content">
+     
+        <Card>
+          <CardHeader>
+            <CardTitle tag="h4">User List</CardTitle>
+          </CardHeader>
+          <CardFooter>
+            <div>Total Users: {users.length}</div>
+          </CardFooter>
+          <CardBody>
+            <Table responsive>
+              <thead className="text-primary">
+                <tr>
+                  <th>fullName</th>
+                  <th>Email</th>
+                  <th>photoUrl</th>
+                  <th>number</th>
+                  <th>gender</th>
+                  <th>birthdate</th>
+                  <th>nationality</th>
+                  <th>city</th>
+                  <th>verify</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user) => (
+                  <tr key={user.id}>
+                    <td>{user.fullName}</td>
+                    <td>{user.email}</td>
+                    <td>{user.photoUrl}</td>
+                    <td>{user.number}</td>
+                    <td>{user.gender}</td>
+                    <td>{user.birthdate}</td>
+                    <td>{user.nationality}</td>
+                    <td>{user.city}</td>
+                    <td>{user.verify}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </CardBody>
+        </Card>
+       
+      </div>
+
+      {/* Your form for adding a new user goes here */}
+      {/* You can use a form similar to the QR code management form */}
+    </>
   );
 }
 
-export default Users;
+export default UserManagement;

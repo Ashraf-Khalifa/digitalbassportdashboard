@@ -40,7 +40,7 @@ function PrivacyPolicies() {
 
     try {
       const response = await axios.post(
-        "https://coral-app-harbz.ondigitalocean.app/privacy/add",
+        "https://seashell-app-6v6yj.ondigitalocean.app/privacy/add",
         newPolicy
       );
 
@@ -57,7 +57,7 @@ function PrivacyPolicies() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://coral-app-harbz.ondigitalocean.app/privacy/list");
+      const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/privacy/list");
       setPolicies(response.data.data);
       setLoading(false);
       setError(null);
@@ -72,7 +72,7 @@ function PrivacyPolicies() {
     console.log("Deleting policy with ID:", policyId);
 
     try {
-      await axios.delete(`https://coral-app-harbz.ondigitalocean.app/privacy/delete/${policyId}`);
+      await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/privacy/delete/${policyId}`);
       setPolicies((prevPolicies) =>
         prevPolicies.filter((policy) => policy.id !== policyId)
       );
@@ -95,7 +95,7 @@ function PrivacyPolicies() {
 
     try {
       const response = await axios.put(
-        `https://coral-app-harbz.ondigitalocean.app/privacy/update/${selectedPolicyId}`,
+        `https://seashell-app-6v6yj.ondigitalocean.app/privacy/update/${selectedPolicyId}`,
         updatePolicy
       );
 

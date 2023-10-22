@@ -56,7 +56,7 @@ function TankShop() {
       formData.append("content", newItem.content);
 
       const response = await axios.post(
-        "https://coral-app-harbz.ondigitalocean.app/shop/add",
+        "https://seashell-app-6v6yj.ondigitalocean.app/shop/add",
         formData,
         {
           headers: {
@@ -81,7 +81,7 @@ function TankShop() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://coral-app-harbz.ondigitalocean.app/shop/list"
+        "https://seashell-app-6v6yj.ondigitalocean.app/shop/list"
       );
       setItems(response.data.data);
       setItemCount(response.data.data.length); // Update item count
@@ -100,7 +100,7 @@ function TankShop() {
     try {
       // Send a DELETE request to delete the item from the database
       await axios.delete(
-        `https://coral-app-harbz.ondigitalocean.app/shop/delete/${itemId}`
+        `https://seashell-app-6v6yj.ondigitalocean.app/shop/delete/${itemId}`
       );
 
       // After successfully deleting the item and its image (if it had one),
@@ -137,7 +137,7 @@ function TankShop() {
       formData.append("content", updateItem.content);
 
       const response = await axios.put(
-        `https://coral-app-harbz.ondigitalocean.app/shop/update/${selectedItemId}`,
+        `https://seashell-app-6v6yj.ondigitalocean.app/shop/update/${selectedItemId}`,
         formData,
         {
           headers: {

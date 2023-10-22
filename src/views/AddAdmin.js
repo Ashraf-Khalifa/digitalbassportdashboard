@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Paper Dashboard React - v1.3.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import axios from "axios";
 import React, { useState,useEffect } from "react";
 
@@ -49,7 +31,7 @@ function UsersCRUD() {
     const fetchData = async () => {
       try {
         //modify route
-        const response = await axios.get("https://monkfish-app-wyvrc.ondigitalocean.app/product/get");
+        const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/product/get");
         setAdd(response.data);
       } catch (error) {
         console.log(`Error getting news from frontend: ${error}`);
@@ -62,7 +44,7 @@ function UsersCRUD() {
     try {
       const response = await axios.post(
          //modify route
-        "https://monkfish-app-wyvrc.ondigitalocean.app/product/add",
+        "https://seashell-app-6v6yj.ondigitalocean.app/product/add",
         {
             username,
             email,
@@ -92,7 +74,7 @@ function UsersCRUD() {
         setUpdateUserId(id);
          //modify route
       const response = await axios.patch(
-        `https://monkfish-app-wyvrc.ondigitalocean.app/product/edit/${id}`,
+        `https://seashell-app-6v6yj.ondigitalocean.app/product/edit/${id}`,
         {
             username:username,
             email:email,
@@ -114,7 +96,7 @@ function UsersCRUD() {
     try {
                  //modify route
       const response = await axios.delete(
-        `https://monkfish-app-wyvrc.ondigitalocean.app/product/delete/${id}`
+        `https://seashell-app-6v6yj.ondigitalocean.app/product/delete/${id}`
       );
       console.log(id);
       console.log(response);

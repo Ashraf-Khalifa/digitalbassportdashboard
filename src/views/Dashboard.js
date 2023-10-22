@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, CardBody, CardFooter, CardTitle, Row, Col } from "reactstrap";
+import { useProtectedRoute } from './useProtectedRoute';
 
 function Dashboard() {
   const [gallerycount, setgallery] = useState([]);
@@ -14,12 +15,19 @@ function Dashboard() {
   const [Terms, setTerms] = useState([]);
   const [isUpdateClicked, setIsUpdateClicked] = useState(false);
   const [eventCount, setEventCount] = useState([]);
+  const [qrcodeCount, setqrcodeCount] = useState([]);
+  
+  const userRole = 'admin'; // Fetch the user's role or use the state you've stored
+
+  // Protect this route for 'admin' and 'superadmin' roles
+  useProtectedRoute(['admin', 'superadmin'], userRole);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://coral-app-harbz.ondigitalocean.app/event/list"
+          "https://seashell-app-6v6yj.ondigitalocean.app/event/list"
         );
         // setProduct(response.data);
         setEventCount(response.data.data);
@@ -35,7 +43,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://coral-app-harbz.ondigitalocean.app/gallery/images"
+          "https://seashell-app-6v6yj.ondigitalocean.app/gallery/images"
         );
         setgallery(response.data.data);
       } catch (error) {
@@ -49,7 +57,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://coral-app-harbz.ondigitalocean.app/social_media/list"
+          "https://seashell-app-6v6yj.ondigitalocean.app/social_media/list"
         );
         setSocialMedia(response.data.data);
       } catch (error) {
@@ -63,7 +71,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://coral-app-harbz.ondigitalocean.app/icons/list"
+          "https://seashell-app-6v6yj.ondigitalocean.app/icons/list"
         );
         seticons(response.data.data);
       } catch (error) {
@@ -77,7 +85,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://coral-app-harbz.ondigitalocean.app/background/list"
+          "https://seashell-app-6v6yj.ondigitalocean.app/background/list"
         );
         setBackground(response.data.data);
       } catch (error) {
@@ -91,7 +99,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://coral-app-harbz.ondigitalocean.app/about/list"
+          "https://seashell-app-6v6yj.ondigitalocean.app/about/list"
         );
         setabout(response.data.data);
       } catch (error) {
@@ -105,7 +113,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://coral-app-harbz.ondigitalocean.app/user/count"
+          "https://seashell-app-6v6yj.ondigitalocean.app/user/count"
         );
         const userCount = response.data.data[0].count; // Access the count property inside data
         setUserCount(userCount);
@@ -121,7 +129,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://coral-app-harbz.ondigitalocean.app/shop/list"
+          "https://seashell-app-6v6yj.ondigitalocean.app/shop/list"
         );
         setTankShop(response.data.data);
       } catch (error) {
@@ -136,7 +144,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://coral-app-harbz.ondigitalocean.app/privacy/list"
+          "https://seashell-app-6v6yj.ondigitalocean.app/privacy/list"
         );
         setPrivacyPolicies(response.data.data);
       } catch (error) {
@@ -151,9 +159,24 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://coral-app-harbz.ondigitalocean.app/terms/list"
+          "https://seashell-app-6v6yj.ondigitalocean.app/terms/list"
         );
         setTerms(response.data.data);
+      } catch (error) {
+        console.log(`Error getting Blog from frontend: ${error}`);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://seashell-app-6v6yj.ondigitalocean.app/qr/list"
+        );
+        setqrcodeCount(response.data.data);
       } catch (error) {
         console.log(`Error getting Blog from frontend: ${error}`);
       }
@@ -399,7 +422,31 @@ function Dashboard() {
               </CardFooter>
             </Card>
           </Col>
+          <Col lg="3" md="6" sm="6">
+            <Card className="card-stats">
+              <CardBody>
+                <Row>
+                  <Col md="4" xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-globe text-warning" />
+                    </div>
+                  </Col>
+                  <Col md="8" xs="7">
+                    <div className="numbers">
+                      <p className="card-category">QR Code</p>
+                      <CardTitle tag="p">{qrcodeCount.length}</CardTitle>
+                      <p />
+                    </div>
+                  </Col>
+                </Row>
+              </CardBody>
+              <CardFooter>
+                <hr />
+              </CardFooter>
+            </Card>
+          </Col>
         </Row>
+    
       </div>
     </>
   );

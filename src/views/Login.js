@@ -1,27 +1,97 @@
-import React from "react";
-import "../assets/css/Login.css"
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const LoginForm = () => {
-    const navigate=useNavigate()
-    const handleSubmit=()=>{
-navigate('/admin/dashboard')
+import "../assets/css/Login.css";
+import Cookies from "js-cookie";
+import axios from "axios";
+
+function LoginForm() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [verify, setVerify] = useState(0); // Initialize "verify" to 0
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const response = await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/admin/login", {
+        email,
+        password,
+      });
+  
+      if (response.status === 200) {
+        // Successful login, create a token and store it
+        const token = response.data.token;
+        const userRole = response.data.role;
+  
+        // Create a userData object
+        const userData = {
+          token,
+          role: userRole,
+        };
+  
+        // Store the userData object in local storage
+        localStorage.setItem("userData", JSON.stringify(userData));
+  
+        // Store the token in local storage
+        localStorage.setItem("token", token);
+  
+        // Store the user role in local storage
+        localStorage.setItem("userRole", userRole);
+  
+        Cookies.set("token", token, { expires: 7 });
+  
+        setVerify(verify); // Update the "verify" state
+  
+        if (verify === 1) {
+          // User is verified, you can add logic here if needed
+        }
+  
+        // Navigate to the dashboard
+        navigate("/admin/dashboard");
+      }
+    } catch (error) {
+      // Handle login error, e.g., show an error message
+      console.error(error);
     }
+  };
+  
+  
+
   return (
     <div className="container">
-
-    <div id="login-form">
-      <h1>Login</h1>
-      <form>
-        <label htmlFor="username">Username:</label>
-        <input type="text" id="username" name="username" />
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" />
-        <input type="submit" value="Submit" onClick={handleSubmit}/>
-      </form>
+      <div id="login-form">
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <input type="submit" value="Submit" onClick={handleSubmit} />
+          </div>
+        </form>
+      </div>
     </div>
-        </div>
-
   );
-};
+}
 
 export default LoginForm;

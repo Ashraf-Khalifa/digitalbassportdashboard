@@ -42,7 +42,7 @@ function Terms() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://coral-app-harbz.ondigitalocean.app/terms/add", newTerm);
+      const response = await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/terms/add", newTerm);
 
       console.log("Term added successfully:", response.data);
       fetchData();
@@ -57,7 +57,7 @@ function Terms() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://coral-app-harbz.ondigitalocean.app/terms/list");
+      const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/terms/list");
       setTerms(response.data.data);
       setTermCount(response.data.data.length);
       setLoading(false);
@@ -73,7 +73,7 @@ function Terms() {
     console.log("Deleting term with ID:", termId);
 
     try {
-      await axios.delete(`https://coral-app-harbz.ondigitalocean.app/terms/delete/${termId}`);
+      await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/terms/delete/${termId}`);
       setTerms((prevTerms) => prevTerms.filter((term) => term.id !== termId));
     } catch (error) {
       console.error("Error deleting term:", error);
@@ -94,7 +94,7 @@ function Terms() {
 
     try {
       const response = await axios.put(
-        `https://coral-app-harbz.ondigitalocean.app/terms/update/${selectedTermId}`,
+        `https://seashell-app-6v6yj.ondigitalocean.app/terms/update/${selectedTermId}`,
         updateTerm
       );
 
