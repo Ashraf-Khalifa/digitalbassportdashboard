@@ -26,7 +26,7 @@ function SocialMedia() {
 
   const fetchSocialMediaLinks = async () => {
     try {
-      const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/social_media/list");
+      const response = await axios.get("http://localhost:3000/social_media/list");
       if (response.data.success) {
         setLinks(response.data.data);
         setlinkCount(response.data.data.length);
@@ -44,7 +44,7 @@ function SocialMedia() {
         link: document.getElementById("newLinkUrl").value,
       };
 
-      await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/social_media/add", newLink);
+      await axios.post("http://localhost:3000/social_media/add", newLink);
       fetchSocialMediaLinks();
       document.getElementById("newLinkUrl").value = "";
     } catch (error) {
@@ -54,7 +54,7 @@ function SocialMedia() {
 
   const updateLink = async () => {
     try {
-      await axios.put(`https://seashell-app-6v6yj.ondigitalocean.app/social_media/update/${editingLink.id}`, editingLink);
+      await axios.put(`http://localhost:3000/social_media/update/${editingLink.id}`, editingLink);
       fetchSocialMediaLinks();
       setEditingLink(null);
     } catch (error) {
@@ -64,7 +64,7 @@ function SocialMedia() {
 
   const deleteLink = async (id) => {
     try {
-      await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/social_media/delete/${id}`);
+      await axios.delete(`http://localhost:3000/social_media/delete/${id}`);
       fetchSocialMediaLinks();
     } catch (error) {
       console.error("Error deleting social media link:", error);

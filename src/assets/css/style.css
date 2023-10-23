@@ -3,4 +3,9 @@
     color: green; 
     
   }
-  
+  .button-container {
+    display: flex; /* Display the buttons in a horizontal line */
+    justify-content: space-between; /* Add space between buttons */
+    align-items: center; /* Align buttons vertically in the middle */
+  }
+ 

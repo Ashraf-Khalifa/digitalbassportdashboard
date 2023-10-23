@@ -27,7 +27,7 @@ function About() {
 
   const fetchAboutItems = async () => {
     try {
-      const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/about/list");
+      const response = await axios.get("http://localhost:3000/about/list");
       if (response.data.success) {
         setAboutItems(response.data.data);
         setAboutItemCount(response.data.data.length);
@@ -46,7 +46,7 @@ function About() {
         description: document.getElementById("newAboutDescription").value,
       };
 
-      await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/about/add", newAboutItem);
+      await axios.post("http://localhost:3000/about/add", newAboutItem);
       fetchAboutItems();
       document.getElementById("newAboutTitle").value = "";
       document.getElementById("newAboutDescription").value = "";
@@ -57,7 +57,7 @@ function About() {
 
   const updateAboutItem = async () => {
     try {
-      await axios.put(`https://seashell-app-6v6yj.ondigitalocean.app/about/update/${editingAboutItem.id}`, editingAboutItem);
+      await axios.put(`http://localhost:3000/about/update/${editingAboutItem.id}`, editingAboutItem);
       fetchAboutItems();
       setEditingAboutItem(null);
     } catch (error) {
@@ -67,7 +67,7 @@ function About() {
 
   const deleteAboutItem = async (id) => {
     try {
-      await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/about/delete/${id}`);
+      await axios.delete(`http://localhost:3000/about/delete/${id}`);
       fetchAboutItems();
     } catch (error) {
       console.error("Error deleting About item:", error);

@@ -27,9 +27,10 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/event/list"
+          "http://localhost:3000/event/list"
         );
         // setProduct(response.data);
+        console.log(`rrr${response}`)
         setEventCount(response.data.data);
       } catch (error) {
         console.log(`Error getting news from frontend: ${error}`);
@@ -43,7 +44,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/gallery/images"
+          "http://localhost:3000/gallery/images"
         );
         setgallery(response.data.data);
       } catch (error) {
@@ -57,7 +58,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/social_media/list"
+          "http://localhost:3000/social_media/list"
         );
         setSocialMedia(response.data.data);
       } catch (error) {
@@ -71,7 +72,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/icons/list"
+          "http://localhost:3000/icons/list"
         );
         seticons(response.data.data);
       } catch (error) {
@@ -85,7 +86,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/background/list"
+          "http://localhost:3000/background/list"
         );
         setBackground(response.data.data);
       } catch (error) {
@@ -99,9 +100,11 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/about/list"
+          "http://localhost:3000/about/list"
+          // "https://seashell-app-6v6yj.ondigitalocean.app/about/list"
         );
         setabout(response.data.data);
+        console.log(`aaa${response}`)
       } catch (error) {
         console.log(`Error getting Blog from frontend: ${error}`);
       }
@@ -113,7 +116,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/user/count"
+          "http://localhost:3000/user/count"
         );
         const userCount = response.data.data[0].count; // Access the count property inside data
         setUserCount(userCount);
@@ -129,7 +132,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/shop/list"
+          "http://localhost:3000/shop/list"
         );
         setTankShop(response.data.data);
       } catch (error) {
@@ -144,7 +147,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/privacy/list"
+          "http://localhost:3000/privacy/list"
         );
         setPrivacyPolicies(response.data.data);
       } catch (error) {
@@ -159,7 +162,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/terms/list"
+          "http://localhost:3000/terms/list"
         );
         setTerms(response.data.data);
       } catch (error) {
@@ -174,7 +177,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://seashell-app-6v6yj.ondigitalocean.app/qr/list"
+          "http://localhost:3000/qr/list"
         );
         setqrcodeCount(response.data.data);
       } catch (error) {

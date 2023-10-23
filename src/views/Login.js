@@ -16,7 +16,7 @@ function LoginForm() {
     e.preventDefault();
   
     try {
-      const response = await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/admin/login", {
+      const response = await axios.post("http://localhost:3000/admin/login", {
         email,
         password,
       });
@@ -91,6 +91,7 @@ function LoginForm() {
         </form>
       </div>
     </div>
+    
   );
 }
 

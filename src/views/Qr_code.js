@@ -79,7 +79,7 @@ function QRManagement() {
       formData.append("logo", newQR.logo);
 
       const response = await axios.post(
-        "https://seashell-app-6v6yj.ondigitalocean.app/qr/add",
+        "http://localhost:3000/qr/add",
         formData,
         {
           headers: {
@@ -108,7 +108,7 @@ function QRManagement() {
 
    const fetchData = async () => {
     try {
-      const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/qr/list");
+      const response = await axios.get("http://localhost:3000/qr/list");
       if (response.status === 200) {
         setQRcodes(response.data.data); // Update qrcodes with the fetched data
         setQRCodeCount(response.data.data.length); // Set the QR code count
@@ -130,7 +130,7 @@ function QRManagement() {
 
     try {
       await axios.delete(
-        `https://seashell-app-6v6yj.ondigitalocean.app/delete/${qrId}`
+        `http://localhost:3000/delete/${qrId}`
       );
 
       setQRcodes((prevQRcodes) =>
@@ -236,7 +236,7 @@ const handleQRUpdate = async (e) => {
       if (deleteImage) {
         formData.append("deleteImage", deleteImage);
         // Add a request to delete the image
-        await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/qr/deleteImage/${selectedQRId}`);
+        await axios.delete(`http://localhost:3000/qr/deleteImage/${selectedQRId}`);
       } else {
         formData.append("image", updateQR.image);
       }
@@ -246,7 +246,7 @@ const handleQRUpdate = async (e) => {
       if (deleteAudio) {
         formData.append("deleteAudio", deleteAudio);
         // Add a request to delete the audio file
-        await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/qr/deleteaudio/${selectedQRId}`);
+        await axios.delete(`http://localhost:3000/qr/deleteaudio/${selectedQRId}`);
       } else {
         formData.append("audio", updateQR.audio);
       }
@@ -256,7 +256,7 @@ const handleQRUpdate = async (e) => {
       if (deleteVideo) {
         formData.append("deleteVideo", deleteVideo);
         // Add a request to delete the video file
-        await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/qr/deletevideo/${selectedQRId}`);
+        await axios.delete(`http://localhost:3000/qr/deletevideo/${selectedQRId}`);
       } else {
         formData.append("video", updateQR.video);
       }
@@ -266,14 +266,14 @@ const handleQRUpdate = async (e) => {
       if (deleteLogo) {
         formData.append("deleteLogo", deleteLogo);
         // Add a request to delete the logo file
-        await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/qr/deletelogo/${selectedQRId}`);
+        await axios.delete(`http://localhost:3000/qr/deletelogo/${selectedQRId}`);
       } else {
         formData.append("logo", updateQR.logo);
       }
     }
 
     const response = await axios.put(
-      `https://seashell-app-6v6yj.ondigitalocean.app/qr/update/${selectedQRId}`,
+      `http://localhost:3000/qr/update/${selectedQRId}`,
       formData,
       {
         headers: {
@@ -372,7 +372,9 @@ const handleQRUpdate = async (e) => {
                       {qr.logo && <img src={qr.logo} alt={qr.logo} />}
                     </td>
                     <td>
-                      <button onClick={() => handleUpdate(qr)}>Update</button>
+                      <Button
+                       color="success"
+                      onClick={() => handleUpdate(qr)}>Update</Button>
                     </td>
                   </tr>
                 ))}

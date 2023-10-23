@@ -40,7 +40,7 @@ function UserManagement() {
   // Function to fetch the list of users
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/user/List");
+      const response = await axios.get("http://localhost:3000/user/List");
       setUsers(response.data.data);
       setLoading(false);
     } catch (error) {
@@ -54,7 +54,7 @@ function UserManagement() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/user/add", newUser);
+      const response = await axios.post("http://localhost:3000/user/add", newUser);
       console.log("User added successfully:", response.data);
 
       // Clear the input fields

@@ -56,7 +56,7 @@ function TankShop() {
       formData.append("content", newItem.content);
 
       const response = await axios.post(
-        "https://seashell-app-6v6yj.ondigitalocean.app/shop/add",
+        "http://localhost:3000/shop/add",
         formData,
         {
           headers: {
@@ -81,7 +81,7 @@ function TankShop() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://seashell-app-6v6yj.ondigitalocean.app/shop/list"
+        "http://localhost:3000/shop/list"
       );
       setItems(response.data.data);
       setItemCount(response.data.data.length); // Update item count
@@ -100,7 +100,7 @@ function TankShop() {
     try {
       // Send a DELETE request to delete the item from the database
       await axios.delete(
-        `https://seashell-app-6v6yj.ondigitalocean.app/shop/delete/${itemId}`
+        `http://localhost:3000/shop/delete/${itemId}`
       );
 
       // After successfully deleting the item and its image (if it had one),
@@ -137,7 +137,7 @@ function TankShop() {
       formData.append("content", updateItem.content);
 
       const response = await axios.put(
-        `https://seashell-app-6v6yj.ondigitalocean.app/shop/update/${selectedItemId}`,
+        `http://localhost:3000/shop/update/${selectedItemId}`,
         formData,
         {
           headers: {
@@ -277,16 +277,19 @@ function TankShop() {
                             )}
                           </td>
                           <td>
-                            <button
+                            <Button
+                            color="danger"
                               onClick={() =>
                                 handleDelete(item.id, item.image_path)
                               }
                             >
                               Delete
-                            </button>
-                            <button onClick={() => handleUpdate(item)}>
+                            </Button>{" "}
+                            <Button 
+                             color="success"
+                            onClick={() => handleUpdate(item)}>
                               Update
-                            </button>
+                            </Button>
                           </td>
                         </tr>
                       ))}

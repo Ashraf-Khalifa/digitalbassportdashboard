@@ -12,6 +12,8 @@ import {
   Table,
   Form, FormGroup, Input, Button
 } from "reactstrap";
+import "../assets/css/style.css";
+
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -54,7 +56,7 @@ function Events() {
       formData.append("content", newEvent.content);
 
       const response = await axios.post(
-        "https://seashell-app-6v6yj.ondigitalocean.app/event/add",
+        "http://localhost:3000/event/add",
         formData,
         {
           headers: {
@@ -79,7 +81,7 @@ function Events() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://seashell-app-6v6yj.ondigitalocean.app/event/list"
+        "http://localhost:3000/event/list"
       );
       setEvents(response.data.data);
       setEventCount(response.data.data.length); // Update event count
@@ -99,7 +101,7 @@ function Events() {
     try {
       // Send a DELETE request to delete the event from the database
       await axios.delete(
-        `https://seashell-app-6v6yj.ondigitalocean.app/event/delete/${eventId}`
+        `http://localhost:3000/event/delete/${eventId}`
       );
   
       // After successfully deleting the event and its image (if it had one),
@@ -143,7 +145,7 @@ function Events() {
       formData.append("content", updateEvent.content);
 
       const response = await axios.put(
-        `https://seashell-app-6v6yj.ondigitalocean.app/event/update/${selectedEventId}`,
+        `http://localhost:3000/event/update/${selectedEventId}`,
         formData,
         {
           headers: {
@@ -281,8 +283,14 @@ function Events() {
       )}
     </td>
     <td>
-    <button onClick={() => handleDelete(event.id, event.image_path)}>Delete</button>
-    <button onClick={() => handleUpdate(event)}>Update</button>
+    <div className="button-container">
+    <Button color="danger" onClick={() => handleDelete(event.id, event.image_path)} style={{ marginRight: '10px' }}>
+      Delete
+    </Button>
+    <Button color="success" onClick={() => handleUpdate(event)}>
+      Update
+    </Button>
+  </div>
 
 
     </td>

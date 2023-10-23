@@ -14,6 +14,7 @@ import Terms from "views/Terms";
 import Users from "views/Users";
 import SocialMedia from "views/SocialMedia";
 import Events from "views/Events";
+import Adduser from "views/Adduser";
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -171,6 +172,15 @@ var routes = [
     name: "Add admin",
     icon: "nc-icon nc-spaceship",
     component: <UserPage />,
+    layout: "/admin",
+
+  },
+  {
+    
+    path: "/addUser",
+    name: "Add user",
+    icon: "nc-icon nc-spaceship",
+    component: <Adduser />,
     layout: "/admin",
 
   },

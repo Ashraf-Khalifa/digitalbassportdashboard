@@ -40,7 +40,7 @@ function PrivacyPolicies() {
 
     try {
       const response = await axios.post(
-        "https://seashell-app-6v6yj.ondigitalocean.app/privacy/add",
+        "http://localhost:3000/privacy/add",
         newPolicy
       );
 
@@ -57,7 +57,7 @@ function PrivacyPolicies() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/privacy/list");
+      const response = await axios.get("http://localhost:3000/privacy/list");
       setPolicies(response.data.data);
       setLoading(false);
       setError(null);
@@ -72,7 +72,7 @@ function PrivacyPolicies() {
     console.log("Deleting policy with ID:", policyId);
 
     try {
-      await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/privacy/delete/${policyId}`);
+      await axios.delete(`http://localhost:3000/privacy/delete/${policyId}`);
       setPolicies((prevPolicies) =>
         prevPolicies.filter((policy) => policy.id !== policyId)
       );
@@ -95,7 +95,7 @@ function PrivacyPolicies() {
 
     try {
       const response = await axios.put(
-        `https://seashell-app-6v6yj.ondigitalocean.app/privacy/update/${selectedPolicyId}`,
+        `http://localhost:3000/privacy/update/${selectedPolicyId}`,
         updatePolicy
       );
 
@@ -183,12 +183,16 @@ function PrivacyPolicies() {
                         <td>{policy.title}</td>
                         <td>{policy.content}</td>
                         <td>
-                          <button onClick={() => handleDelete(policy.id)}>
+                          <Button 
+                          color="danger"
+                          onClick={() => handleDelete(policy.id)}>
                             Delete
-                          </button>
-                          <button onClick={() => handleUpdate(policy)}>
+                          </Button>{" "}
+                          <Button 
+                           color="success"
+                          onClick={() => handleUpdate(policy)}>
                             Update
-                          </button>
+                          </Button>
                         </td>
                       </tr>
                     ))}

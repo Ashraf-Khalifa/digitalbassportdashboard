@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import "../assets/css/Login.css";
 import axios from "axios";
-
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  Table,
+} from "reactstrap";
 function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,7 +51,7 @@ function SignupForm() {
 
     try {
       // Check if the email already exists in the database
-      const response = await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/admin/check-email", {
+      const response = await axios.post("http://localhost:3000/admin/check-email", {
         email,
       });
 
@@ -56,7 +67,7 @@ function SignupForm() {
     }
 
     try {
-      const response = await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/admin/signup", {
+      const response = await axios.post("http://localhost:3000/admin/signup", {
         email,
         password,
         role: role.toString(),
@@ -87,8 +98,8 @@ function SignupForm() {
         <h1>Add admin or super admin</h1>
         <form onSubmit={handleSignup}>
           <div>
-            <label htmlFor="email">Email:</label>
-            <input
+            <Label htmlFor="email">Email:</Label>
+            <Input
               type="text"
               id="email"
               name="email"
@@ -99,8 +110,8 @@ function SignupForm() {
             {emailError && <span className="error">{emailError}</span>}
           </div>
           <div>
-            <label htmlFor="password">Password:</label>
-            <input
+            <Label htmlFor="password">Password:</Label>
+            <Input
               type="password"
               id="password"
               name="password"
@@ -111,8 +122,8 @@ function SignupForm() {
             {passwordError && <span className="error">{passwordError}</span>}
           </div>
           <div>
-            <label htmlFor="role">Role:</label>
-            <input
+            <Label htmlFor="role">Role:</Label>
+            <Input
               type="text"
               id="role"
               name="role"

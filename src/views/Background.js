@@ -26,7 +26,7 @@ function Background() {
 
   const fetchBackgrounds = async () => {
     try {
-      const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/background/list");
+      const response = await axios.get("http://localhost:3000/background/list");
       if (response.data.success) {
         setBackgrounds(response.data.data);
         setBackgroundCount(response.data.data.length);
@@ -45,7 +45,7 @@ function Background() {
         link: document.getElementById("newBackgroundLink").value,
       };
 
-      await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/background/add", newBackground);
+      await axios.post("http://localhost:3000/background/add", newBackground);
       fetchBackgrounds();
       document.getElementById("newBackgroundName").value = "";
       document.getElementById("newBackgroundLink").value = "";
@@ -56,7 +56,7 @@ function Background() {
 
   const updateBackground = async () => {
     try {
-      await axios.put(`https://seashell-app-6v6yj.ondigitalocean.app/background/update/${editingBackground.id}`, editingBackground);
+      await axios.put(`http://localhost:3000/background/update/${editingBackground.id}`, editingBackground);
       fetchBackgrounds();
       setEditingBackground(null);
     } catch (error) {
@@ -66,7 +66,7 @@ function Background() {
 
   const deleteBackground = async (id) => {
     try {
-      await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/background/delete/${id}`);
+      await axios.delete(`http://localhost:3000/background/delete/${id}`);
       fetchBackgrounds();
     } catch (error) {
       console.error("Error deleting background:", error);

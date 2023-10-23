@@ -35,7 +35,7 @@ function Gallery() {
       const formData = new FormData();
       formData.append('image', newImage);
 
-      await axios.post('https://seashell-app-6v6yj.ondigitalocean.app/gallery/upload', formData, {
+      await axios.post('http://localhost:3000/gallery/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -51,7 +51,7 @@ function Gallery() {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get('https://seashell-app-6v6yj.ondigitalocean.app/gallery/images');
+      const response = await axios.get('http://localhost:3000/gallery/images');
       setImages(response.data.data);
       setgalleryCount(response.data.data.length); 
       setLoading(false);
@@ -67,7 +67,7 @@ function Gallery() {
 
   const handleDelete = async (imageId) => {
     try {
-      await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/gallery/delete/${imageId}`);
+      await axios.delete(`http://localhost:3000/gallery/delete/${imageId}`);
       // Remove the deleted image from the state
       setImages((prevImages) => 
       prevImages.filter((image) => image.id !== imageId));
@@ -123,7 +123,7 @@ function Gallery() {
       </td>
       
       <td>
-        <button onClick={() => handleDelete(image.id)}>Delete</button>
+        <Button color="danger" onClick={() => handleDelete(image.id)}>Delete</Button>
       </td>
     </tr>
   ))}

@@ -26,7 +26,7 @@ function Icons() {
 
   const fetchIcons = async () => {
     try {
-      const response = await axios.get("https://seashell-app-6v6yj.ondigitalocean.app/icons/list");
+      const response = await axios.get("http://localhost:3000/icons/list");
       if (response.data.success) {
         setIcons(response.data.data);
         setIconCount(response.data.data.length);
@@ -45,7 +45,7 @@ function Icons() {
         link: document.getElementById("newIconLink").value,
       };
 
-      await axios.post("https://seashell-app-6v6yj.ondigitalocean.app/icons/add", newIcon);
+      await axios.post("http://localhost:3000/icons/add", newIcon);
       fetchIcons();
       document.getElementById("newIconName").value = "";
       document.getElementById("newIconLink").value = "";
@@ -56,7 +56,7 @@ function Icons() {
 
   const updateIcon = async () => {
     try {
-      await axios.put(`https://seashell-app-6v6yj.ondigitalocean.app/icons/update/${editingIcon.id}`, editingIcon);
+      await axios.put(`http://localhost:3000/icons/update/${editingIcon.id}`, editingIcon);
       fetchIcons();
       setEditingIcon(null);
     } catch (error) {
@@ -66,7 +66,7 @@ function Icons() {
 
   const deleteIcon = async (id) => {
     try {
-      await axios.delete(`https://seashell-app-6v6yj.ondigitalocean.app/icons/delete/${id}`);
+      await axios.delete(`http://localhost:3000/icons/delete/${id}`);
       fetchIcons();
     } catch (error) {
       console.error("Error deleting icon:", error);
