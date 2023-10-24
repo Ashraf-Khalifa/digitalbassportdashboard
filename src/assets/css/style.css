@@ -8,4 +8,9 @@
     justify-content: space-between; /* Add space between buttons */
     align-items: center; /* Align buttons vertically in the middle */
   }
- 
+  .textarea-label {
+    display: block; /* Make it a block-level element */
+    margin-bottom: 5px; /* Add space between the label and textarea */
+   
+  }
+  

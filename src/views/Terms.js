@@ -137,10 +137,11 @@ function Terms() {
             </Col>
           </Row>
           <Row>
-            <Col md="12">
+            <Col md="6">
               <FormGroup>
-                <label>Content:</label>
-                <Input
+              <label for="content" className="textarea-label">Content:</label>
+               <textarea
+                 style={{ width: '500px' }}
                   type="text"
                   name="content"
                   value={newTerm.content}
@@ -227,10 +228,11 @@ function Terms() {
               </Col>
             </Row>
             <Row>
-              <Col md="12">
+              <Col md="6">
                 <FormGroup>
-                  <label>Content:</label>
-                  <Input
+                <label for="content" className="textarea-label">Content:</label>
+               <textarea
+                 style={{ width: '500px' }}
                     type="text"
                     name="content"
                     value={updateTerm.content}

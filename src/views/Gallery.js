@@ -78,7 +78,10 @@ function Gallery() {
   useEffect(() => {
     fetchImages();
   }, []);
+
   console.log("Images:", images);
+
+
   return (
     <>
       <div className="content">
@@ -114,19 +117,25 @@ function Gallery() {
               </CardHeader>
               <CardBody>
                 <Table responsive>
+                <thead className="text-primary">
+                    <tr>
+                      {/* <th>ID</th> */}
+                      <th>Image</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
                 <tbody>
-  {images.map((image) => (
-    <tr key={image.id}>
-      <td>ID: {image.id}</td>
-      <td>
-        <img src={image.image_path} alt={image.image_path} />
-      </td>
-      
-      <td>
-        <Button color="danger" onClick={() => handleDelete(image.id)}>Delete</Button>
-      </td>
-    </tr>
-  ))}
+                {images.map((image) => (
+  <tr key={image.id}>
+    <td>
+      <img src={`http://localhost:3000/uploads/${image.image_path}`} alt={image.image_path} />
+    </td>
+    <td>
+      <Button color="danger" onClick={() => handleDelete(image.id)}>Delete</Button>
+    </td>
+  </tr>
+))}
+
 </tbody>
                 </Table>
               </CardBody>

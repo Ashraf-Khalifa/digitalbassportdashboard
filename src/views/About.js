@@ -86,7 +86,7 @@ function About() {
               <CardBody>
                 <Form>
                   <Row>
-                    <Col md="4">
+                    <Col md="6">
                       <FormGroup>
                         <label>Title:</label>
                         <Input
@@ -96,10 +96,12 @@ function About() {
                         />
                       </FormGroup>
                     </Col>
-                    <Col md="4">
+                    <Col md="12">
                       <FormGroup>
-                        <label>Description:</label>
-                        <Input
+                      <label for="content" className="textarea-label">Description:</label>
+                        <textarea
+                          style={{ width: '500px' }}
+                        
                           type="text"
                           name="description"
                           id="newAboutDescription"
@@ -156,7 +158,7 @@ function About() {
                 <CardFooter>
                   <Form>
                     <Row>
-                      <Col md="4">
+                      <Col md="6">
                         <FormGroup>
                           <label>Edit Title:</label>
                           <Input
@@ -172,10 +174,12 @@ function About() {
                           />
                         </FormGroup>
                       </Col>
-                      <Col md="4">
+                      <Col md="12">
                         <FormGroup>
-                          <label>Edit Description:</label>
-                          <Input
+                        <label for="content" className="textarea-label">Edit Description:</label>
+               <textarea
+                 style={{ width: '500px' }}
+                        
                             type="text"
                             name="description"
                             value={editingAboutItem.description}

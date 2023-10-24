@@ -54,12 +54,12 @@ function Sidebar(props) {
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
           {props.routes.map((prop, key) => {
-            if (prop.name === 'User Management' && userRole !== '1') {
+            if (prop.name === 'User Management' && userRole !== 'admin') {
               // Skip rendering the "User Management" link for roles other than "1"
               return null;
             }
 
-            if (prop.name === 'Add admin' && userRole !== '1') {
+            if (prop.name === 'Add user' && userRole !== 'admin') {
               // Skip rendering the "Add Admin" link for roles other than "1"
               return null;
             }

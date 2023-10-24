@@ -115,6 +115,13 @@ function Events() {
   };
   
   
+  function formatDateToYYYYMMDD(date) {
+    const eventDate = new Date(date);
+    const year = eventDate.getFullYear();
+    const month = (eventDate.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-indexed, so we add 1
+    const day = eventDate.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
   
   
   
@@ -124,8 +131,7 @@ function Events() {
     setSelectedEventId(event.id); // Set the selected event ID
     setUpdateEvent({
       title: event.title,
-      date: event.date,
-      content: event.content,
+      date: formatDateToYYYYMMDD(event.date), // Format the date for display      content: event.content,
       image_path: event.image_path, // Set the current image path
     });
     setShowUpdateForm(true); // Display the update form
@@ -211,8 +217,9 @@ function Events() {
   <Row>
     <Col md="12">
       <FormGroup>
-        <label>Content:</label>
-        <Input
+      <label for="content" className="textarea-label">Content:</label>
+               <textarea
+                 style={{ width: '500px' }}
           type="text"
           name="content"
           value={newEvent.content}
@@ -275,13 +282,17 @@ function Events() {
                 {events.map((event) => (
   <tr key={event.id}>
     <td>{event.title}</td>
-    <td>{event.date}</td>
-    <td>{event.content}</td>
+    <td>{formatDateToYYYYMMDD(event.date)}</td> {/* Format the date here */}    <td>{event.content}</td>
     <td>
-      {event.image_path && (
-        <img src={event.image_path} alt={event.image_path} />
-      )}
-    </td>
+  {event.image_path && (
+    <img
+      src={`http://localhost:3000/uploads/${event.image_path}`}
+      alt={event.title}
+      style={{ maxWidth: '100px' }}
+    />
+  )}
+</td>
+
     <td>
     <div className="button-container">
     <Button color="danger" onClick={() => handleDelete(event.id, event.image_path)} style={{ marginRight: '10px' }}>
@@ -312,7 +323,7 @@ function Events() {
     <Form onSubmit={handleEventUpdate}>
       {/* Add your update form fields here */}
       <Row>
-        <Col md="6">
+        <Col md="7">
           <FormGroup>
             <label>Title:</label>
             <Input
@@ -325,14 +336,13 @@ function Events() {
             />
           </FormGroup>
         </Col>
-        <Col md="6">
+        <Col md="7">
           <FormGroup>
             <label>Date:</label>
             <Input
               type="text"
               name="date"
-              value={updateEvent.date}
-              onChange={(e) =>
+              value={updateEvent.date}                            onChange={(e) =>
                 setUpdateEvent({ ...updateEvent, date: e.target.value })
               }
             />
@@ -340,10 +350,11 @@ function Events() {
         </Col>
       </Row>
       <Row>
-        <Col md="6">
+        <Col md="7">
           <FormGroup>
-            <label>Content:</label>
-            <Input
+          <label for="content" className="textarea-label">Content:</label>
+               <textarea
+                 style={{ width: '500px' }}
               type="text"
               name="content"
               value={updateEvent.content}
@@ -353,7 +364,7 @@ function Events() {
             />
           </FormGroup>
         </Col>
-        <Col md="6">
+        <Col md="7">
           <FormGroup>
             <label>Image:</label>
             <Input

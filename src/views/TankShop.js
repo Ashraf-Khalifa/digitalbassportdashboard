@@ -21,6 +21,7 @@ function TankShop() {
     title: "",
     price: "",
     content: "",
+   
   });
   const [itemImage, setItemImage] = useState(null);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
@@ -202,8 +203,9 @@ function TankShop() {
           <Row>
             <Col md="12">
               <FormGroup>
-                <label>Content:</label>
-                <Input
+              <label for="content" className="textarea-label">Content:</label>
+               <textarea
+                 style={{ width: '500px' }}
                   type="text"
                   name="content"
                   value={newItem.content}
@@ -268,14 +270,12 @@ function TankShop() {
                           <td>{item.price}</td>
                           <td>{item.content}</td>
                           <td>
-                            {item.image_path && (
-                              <img
-                                src={item.image_path}
-                                alt={item.title}
-                                style={{ maxWidth: "100px" }}
-                              />
-                            )}
-                          </td>
+  {item.image_path && (
+    <img src={`http://localhost:3000${item.image_path}`} alt={item.image_path} />
+  )}
+</td>
+
+
                           <td>
                             <Button
                             color="danger"
@@ -343,8 +343,9 @@ function TankShop() {
             <Row>
               <Col md="12">
                 <FormGroup>
-                  <label>Content:</label>
-                  <Input
+                <label for="content" className="textarea-label">Content:</label>
+               <textarea
+                 style={{ width: '500px' }}
                     type="text"
                     name="content"
                     value={updateItem.content}

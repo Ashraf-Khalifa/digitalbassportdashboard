@@ -4,7 +4,7 @@ import Icons from "views/Icons.js";
 import About from "views/About";
 import Background from "views/Background";
 // import Maps from "views/Map.js";
-import UserPage from "views/User.js";
+// import UserPage from "views/User.js";
 import Qr_code from "views/Qr_code";
 import Gallery from "views/Gallery";
 // import AddAdmin from "views/AddAdmin"
@@ -166,15 +166,15 @@ var routes = [
     layout: "/admin",
 
   },
-  {
+  // {
     
-    path: "/UserPage",
-    name: "Add admin",
-    icon: "nc-icon nc-spaceship",
-    component: <UserPage />,
-    layout: "/admin",
+  //   path: "/UserPage",
+  //   name: "Add admin",
+  //   icon: "nc-icon nc-spaceship",
+  //   component: <UserPage />,
+  //   layout: "/admin",
 
-  },
+  // },
   {
     
     path: "/addUser",
@@ -189,7 +189,7 @@ var routes = [
 
 // Check the user's role and filter out restricted routes
 const userRole = localStorage.getItem("userRole");
-if (userRole === "0") {
+if (userRole === "standard") {
   routes = routes.filter(
     (route) =>
       route.path !== "/user-management" && route.path !== "/UserPage"

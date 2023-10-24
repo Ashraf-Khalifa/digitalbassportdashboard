@@ -68,13 +68,13 @@ function AddUpdateUser() {
       }
     }
     if (name === "role") {
-      if (value === "0" || value === "1") {
-        // Clear the role error if the role is either 0 or 1
+      if (value === "standard" || value === "admin ") {
+        // Clear the role error if the role is either standard or admin 
         setRoleError("");
         setEmailError("");
         setPasswordError("");
       } else {
-        setRoleError("Role must be either 0 or 1");
+        setRoleError("Role must be either standard or admin ");
         setEmailError("");
         setPasswordError("");
         return;
@@ -117,8 +117,7 @@ function AddUpdateUser() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { email, password } = showUpdateForm ? updateUser : newUser;
-
+    const { email, password, role } = showUpdateForm ? updateUser : newUser;
     if (emailExists) {
       // Display the email error message if the email exists
       return;
@@ -133,10 +132,15 @@ function AddUpdateUser() {
       setPasswordError("Password must be at least 8 characters long, start with a capital letter, and contain at least one number");
       return;
     }
+    if (role !== "admin" && role !== "standard") {
+        setRoleError("Role must be either 'admin' or 'standard'");
+        return;
+      }
 
     // Clear the email and password errors if they are valid
     setEmailError("");
     setPasswordError("");
+    setRoleError("");
 
     try {
       if (showUpdateForm) {
@@ -166,7 +170,7 @@ function AddUpdateUser() {
       }
     } catch (error) {
       setEmailError("Email already exists. Please use a different email.");
-      setRoleError("Role must be either 0 or 1");
+      setRoleError("Role must be either standard or admin ");
       console.error(showUpdateForm ? "Error updating user:" : "Error adding user:", error);
     }
   };

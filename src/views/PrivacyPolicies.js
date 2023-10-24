@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "../assets/css/style.css";
+
 import {
   Card,
   CardHeader,
@@ -136,16 +138,19 @@ function PrivacyPolicies() {
                 />
               </FormGroup>
             </Col>
-            <Col md="6">
-              <FormGroup>
-                <label>Content:</label>
-                <Input
-                  type="text"
-                  name="content"
-                  value={newPolicy.content}
-                  onChange={handleInputChange}
-                />
-              </FormGroup>
+            <Col md="12">
+            <FormGroup>
+               <label for="content" className="textarea-label">Content:</label>
+               <textarea
+                 style={{ width: '500px' }}
+                 id="content"
+                 name="content"
+                 value={newPolicy.content}
+                 onChange={handleInputChange}
+               />
+
+                </FormGroup>
+
             </Col>
           </Row>
           <Row>
@@ -221,10 +226,11 @@ function PrivacyPolicies() {
                   />
                 </FormGroup>
               </Col>
-              <Col md="6">
+              <Col md="12">
                 <FormGroup>
-                  <label>Content:</label>
-                  <Input
+                <label for="content" className="textarea-label">Content:</label>
+               <textarea
+                 style={{ width: '500px' }}
                     type="text"
                     name="content"
                     value={updatePolicy.content}

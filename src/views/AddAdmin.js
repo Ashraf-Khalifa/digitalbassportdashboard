@@ -27,6 +27,8 @@ function UsersCRUD() {
   const [isUpdateFormVisible, setIsUpdateFormVisible] = useState(false);
   const [updateUserId, setUpdateUserId] = useState("");
   const [del, setDel] = useState([]);
+
+  
   useEffect(() => {
     const fetchData = async () => {
       try {

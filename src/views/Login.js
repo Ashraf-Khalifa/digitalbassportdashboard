@@ -61,6 +61,7 @@ function LoginForm() {
   
 
   return (
+    <>
     <div className="container">
       <div id="login-form">
         <h1>Login</h1>
@@ -89,9 +90,19 @@ function LoginForm() {
             <input type="submit" value="Submit" onClick={handleSubmit} />
           </div>
         </form>
+
       </div>
     </div>
-    
+    <div className="footer">
+  <h4>
+    Powered by{" "}
+    <a href="https://qtech.com.jo" target="_blank" rel="noopener noreferrer">
+      Qtech
+    </a>
+  </h4>
+</div>
+
+    </> 
   );
 }
 
